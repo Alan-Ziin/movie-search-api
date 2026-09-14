@@ -3,6 +3,7 @@ import com.example.demo.classes.Movie;
 import com.example.demo.classes.MovieSearchResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import tools.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.URI;
@@ -44,6 +45,11 @@ public class OmdbService implements MovieApiService {
         HttpResponse<String> response = clientID.send(requestID,HttpResponse.BodyHandlers.ofString());
 
         Movie filmeID = mapper.readValue(response.body(), Movie.class);
+
+        if(filmeID.getResponse().equals("False")){
+                throw new RuntimeException("Error 404, incorrect IMDb ID.");
+        }
         return filmeID;
     }
+
 }

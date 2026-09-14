@@ -5,53 +5,74 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 // Utilizando o Jackson, biblioteca que converte objetos Java em strings JSON e strings JSON em objetos Java.
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Movie  {
+@JsonIgnoreProperties(ignoreUnknown = false)
+public class Movie {
     @JsonProperty("Title") // JsonProperty Ela permite você ter um nome "bonito", para dizer pro Jackson
     // "essa variavel corresponde a esse campo específico do JSON: no meu caso title
     private String title;
-    @JsonProperty("Year") private String year;
-    @JsonProperty("ImdbID") private String imdbID; // O Api já está devolvendo o nome imdbID
-    @JsonProperty("Type") private String type;
-    @JsonProperty("Poster") private String poster;
-    @JsonProperty("imdbRating")private String imdbRating;
+    @JsonProperty("Year")
+    private String year;
+    @JsonProperty("imdbID")
+    private String imdbID; // O Api já está devolvendo o nome imdbID
+    @JsonProperty("Type")
+    private String type;
+    @JsonProperty("Poster")
+    private String poster;
+    @JsonProperty("imdbRating")
+    private String imdbRating;
+    @JsonProperty("Response")
+    private String response;
+    @JsonProperty("Error")
+    private String error;
 
     @JsonCreator // Metodo construtor do Jackson para "construir" o objeto do main.classes.Movie
     public Movie(
-        @JsonProperty("Title") String title,
-        @JsonProperty("Year") String year,
-        @JsonProperty("ImdbID") String imdbID,
-        @JsonProperty("Type") String type,
-        @JsonProperty("Poster") String poster,
-        @JsonProperty("imdbRating") String imdbRating
-        ){
+            @JsonProperty("Title") String title,
+            @JsonProperty("Year") String year,
+            @JsonProperty("imdbID") String imdbID,
+            @JsonProperty("Type") String type,
+            @JsonProperty("Poster") String poster,
+            @JsonProperty("imdbRating") String imdbRating,
+            @JsonProperty("Response") String response,
+            @JsonProperty("Error") String error
+    ) {
         this.title = title;
         this.year = year;
         this.imdbID = imdbID;
         this.type = type;
         this.poster = poster;
         this.imdbRating = imdbRating;
+        this.response = response;
+        this.error = error;
     }
+
     public String getTitle() {
         return title;
     }
 
-    public String getYear(){
+    public String getYear() {
         return year;
     }
 
-    public String getType(){
+    public String getType() {
         return type;
     }
 
-    public String getPoster(){
+    public String getPoster() {
         return poster;
     }
 
-    public String getImdbID(){
+    public String getImdbID() {
         return imdbID;
     }
-    public String getImdbRating(){
+
+    public String getImdbRating() {
         return imdbRating;
+    }
+    public String getResponse(){
+        return response;
+    }
+    public String getError(){
+        return error;
     }
 }
