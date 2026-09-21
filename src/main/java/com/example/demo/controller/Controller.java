@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 import com.example.demo.classes.Movie;
+import com.example.demo.entities.MovieEntity;
+import com.example.demo.repository.MovieRepository;
 import com.example.demo.services.MovieComparators;
 import com.example.demo.services.OmdbService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +14,14 @@ import java.util.List;
 
 @RestController
 public class Controller {
-    @Autowired
     private final OmdbService omdbService;
+    private final MovieRepository movieRepository;
 
-    public Controller(OmdbService omdbService) {
+    public Controller(OmdbService omdbService, MovieRepository movieRepository) {
         this.omdbService = omdbService;
+        this.movieRepository = movieRepository;
     }
+
 
     // busca filmes por palavra-chave (busca "rasa")
     @GetMapping("/filmes/buscar/{title}")
@@ -61,5 +65,19 @@ public class Controller {
             moviesYearsAndRating.add(filmesPorID);
         }
         return moviesYearsAndRating;
+    }
+
+    @GetMapping("/filmes/filmesSalvos")
+    public List<MovieEntity> listarFilmes(){
+        List<MovieEntity> movies = movieRepository.findAll();
+        return movies;
+    }
+
+    @PostMapping("/filmes/salvar/{imdbID}")
+    public MovieEntity salvarDados(@PathVariable String imdbID) throws IOException, InterruptedException{
+        Movie filmePorID = omdbService.procurarPorID(imdbID);
+        MovieEntity filmeEntidade = new MovieEntity(filmePorID);
+
+        return movieRepository.save(filmeEntidade);
     }
 }
