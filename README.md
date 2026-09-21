@@ -24,11 +24,10 @@ omdb.api.key=SUA_CHAVE_AQUI
 ```
 4. Rode a aplicação via IntelliJ ou sua IDE de preferência e acesse `http://localhost:8080`
 
-## Aprendizados
+## Aprendizados e aprimoramentos
 
-- Primeiro contato com Spring Boot: Controllers, Services e injeção de dependência.
-- Diferença prática entre `@PathVariable` (identifica o recurso) e `@RequestParam` (filtra/refina uma busca)
+- Utilizando o Spring Boot: Controllers, Services e injeção de dependência.
+- Utilizando e diferenciando `@PathVariable` (identifica o recurso) e `@RequestParam` (filtra/refina uma busca)
 - Tratamento de erros de API com `@ExceptionHandler` + `ResponseEntity`.
-- Debug de um bug real de serialização JSON (Jackson): conflito de nomes entre `@JsonProperty` no campo e no construtor de uma mesma classe
 - Testes de integração com `MockMvc`, simulando requisições HTTP reais sem precisar de navegador/Postman
 - Configuração externa de credenciais via `application.properties` e `@Value`.
