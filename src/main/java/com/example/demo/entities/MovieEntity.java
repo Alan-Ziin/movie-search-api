@@ -64,9 +64,7 @@ public class MovieEntity {
         this.imdbId = imdbId;
     }
 
-    public Double getRating() {
-        return rating;
-    }
+    public Double getRating() {return rating;}
     public void setRating(Double rating) {
         this.rating = rating;
     }

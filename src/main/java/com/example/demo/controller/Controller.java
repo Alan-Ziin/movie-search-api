@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 import com.example.demo.classes.Movie;
+import com.example.demo.dto.MovieDTO;
 import com.example.demo.entities.MovieEntity;
 import com.example.demo.repository.MovieRepository;
 import com.example.demo.services.MovieComparators;
@@ -68,9 +69,17 @@ public class Controller {
     }
 
     @GetMapping("/filmes/filmesSalvos")
-    public List<MovieEntity> listarFilmes(){
+    public List<MovieDTO> listarFilmes(){
+
         List<MovieEntity> movies = movieRepository.findAll();
-        return movies;
+
+        List<MovieDTO> moviesDTOs = new ArrayList<>();
+
+        for(MovieEntity oMovie : movies){
+            MovieDTO movieDTO = new MovieDTO(oMovie);
+            moviesDTOs.add(movieDTO);
+        }
+        return moviesDTOs;
     }
 
     @PostMapping("/filmes/salvar/{imdbID}")
