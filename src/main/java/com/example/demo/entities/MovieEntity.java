@@ -1,6 +1,7 @@
 package com.example.demo.entities;
 
 import com.example.demo.classes.Movie;
+import com.example.demo.dto.MovieDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,6 +28,14 @@ public class MovieEntity {
             this.rating = Double.parseDouble(movie.getImdbRating());
         }
     }
+        public void atualizarDados(MovieDTO dto){
+            this.titulo = dto.getTitulo();
+            this.ano = dto.getAno();
+            this.imdbId = dto.getImdbId();
+            this.tipo = dto.getTipo();
+            this.rating = dto.getRating();
+        }
+
 
     public void setTitulo(String titulo){
         this.titulo = titulo;

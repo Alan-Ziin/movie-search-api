@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class Controller {
@@ -68,6 +69,7 @@ public class Controller {
         return moviesYearsAndRating;
     }
 
+    // O nome já diz, lista os filmes salvos do banco
     @GetMapping("/filmes/filmesSalvos")
     public List<MovieDTO> listarFilmes(){
 
@@ -88,5 +90,19 @@ public class Controller {
         MovieEntity filmeEntidade = new MovieEntity(filmePorID);
 
         return movieRepository.save(filmeEntidade);
+    }
+
+    @DeleteMapping("/filmes/{id}")
+    public void deletarFilme(@PathVariable Long id){
+        movieRepository.deleteById(id);
+    }
+
+    @PutMapping("/filmes/{id}")
+    public void atualizarDadosFilmes(@PathVariable Long id, @RequestBody MovieDTO dto){
+        Optional<MovieEntity> filmeIDEncontrado = movieRepository.findById(id);
+        MovieEntity filme = filmeIDEncontrado.get();
+
+        filme.atualizarDados(dto);
+        movieRepository.save(filme);
     }
 }
